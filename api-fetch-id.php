@@ -4,7 +4,7 @@ include_once "config.php";
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
-header("Method: POST");
+header("Access-Control-Allow-Method: POST");
 
 $data = json_decode(file_get_contents("php://input"), true); // php://input reads raw data, while true returns into Associative array
 

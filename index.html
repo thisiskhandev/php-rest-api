@@ -8,6 +8,42 @@
   </head>
   <body>
     <h1>PHP REST API</h1>
-    <a href="fetch-all.php" target="_blank">Fetch All Records</a>
+    <section style="margin-bottom: 30px">
+      <a href="fetch-all.php" target="_blank">Fetch All Records</a>
+    </section>
+    <button onclick="getRecords()">Fetch All records</button>
+    <div id="data"></div>
+    <script>
+      const HOST = "http://localhost/";
+      async function fetchRecords() {
+        const url = `${HOST}php-rest-api/api-fetch.php`;
+        const headers = {
+          Method: "GET",
+          "Content-Type": "application/json",
+        };
+        const res = await fetch(url, { headers });
+        if (!res.ok) {
+          const message = `An Error occured: ${res.status}`;
+          throw new Error(message);
+        } else {
+          const data = await res.json();
+          return data;
+        }
+      }
+
+      function getRecords() {
+        fetchRecords()
+          .then((data) => {
+            console.log(data);
+            data.map((elements, index) => {
+              console.log(elements.id);
+              document.getElementById(
+                "data"
+              ).innerHTML = `<li>${elements.id}</li>`;
+            });
+          })
+          .catch((err) => err.message);
+      }
+    </script>
   </body>
 </html>

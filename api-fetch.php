@@ -4,6 +4,8 @@ include_once "config.php";
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *'); // Public API *
+header("Access-Control-Allow-Method: GET");
+
 
 $sql = "SELECT * FROM students";
 
